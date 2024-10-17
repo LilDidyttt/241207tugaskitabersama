@@ -122,9 +122,10 @@ class UserController extends CI_Controller
         $this->session->unset_userdata('logged_in');
         $this->session->unset_userdata('user_id');
         $this->session->unset_userdata('username');
+        $this->session->unset_userdata('level');
 
         // Set pesan logout
         $this->session->set_flashdata('success', 'Anda telah logout.');
-        redirect('auth/login');
+        redirect('auth/login-siswa');
     }
 }

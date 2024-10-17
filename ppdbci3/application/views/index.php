@@ -165,7 +165,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                                     </a>
                                                                 <?php endif; ?>
 
-
                                                                 <a href="<?= site_url('SiswaController/detail/' . $s['no_daftar']) ?>"
                                                                     class="btn btn-sm btn-success">
                                                                     <i class="fas fa-print"></i> Detail

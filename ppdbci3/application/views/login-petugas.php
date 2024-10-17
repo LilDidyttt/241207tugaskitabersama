@@ -77,7 +77,7 @@
                                         <input type="submit" name="login" value="Login" class="btn btn-primary btn-user btn-block" style="font-size: 1.2rem;">
                                     </form>
                                     <div class="text-center mt-3">
-                                        <a class="small" href="#">Login sebagai siswa</a>
+                                        <a class="small" href="<?= base_url('auth/login-siswa') ?>">Login sebagai siswa</a>
                                     </div>
                                     <hr>
                                 </div>

@@ -46,13 +46,13 @@
 
                                     <!-- Menampilkan Flash Data (Pesan Error/Sukses) -->
                                     <?php if ($this->session->flashdata('error')): ?>
-                                    <div class="alert alert-danger" role="alert">
-                                        <?php echo $this->session->flashdata('error'); ?>
-                                    </div>
+                                        <div class="alert alert-danger" role="alert">
+                                            <?php echo $this->session->flashdata('error'); ?>
+                                        </div>
                                     <?php elseif ($this->session->flashdata('success')): ?>
-                                    <div class="alert alert-success" role="alert">
-                                        <?php echo $this->session->flashdata('success'); ?>
-                                    </div>
+                                        <div class="alert alert-success" role="alert">
+                                            <?php echo $this->session->flashdata('success'); ?>
+                                        </div>
                                     <?php endif; ?>
                                     <!-- End Flash Data -->
 
@@ -85,6 +85,9 @@
                                             style="font-size: 1.2rem;">
                                             Login
                                         </button>
+                                        <div class="text-center mt-3">
+                                            <a class="small" href="<?= base_url('auth/login-petugas') ?>">Login sebagai petugas</a>
+                                        </div>
                                         <hr>
                                     </form>
                                     <!-- End of Form Login -->

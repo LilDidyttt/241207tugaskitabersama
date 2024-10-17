@@ -35,15 +35,16 @@ class AuthSiswa extends CI_Controller
 
         if ($siswa) {
             // Jika siswa ditemukan, simpan informasi ke session
-            $this->session->set_userdata('siswa_logged_in', [
-                'id_siswa' => $siswa->id,
-                'nama' => $siswa->nama,
-                'nisn' => $siswa->nisn,
-                'level' => 'siswa'
-            ]);
+            $session_data = [
+                'user_id' => $siswa->id,
+                'username' => $siswa->username,
+                'level' => 'siswa',
+                'logged_in' => TRUE
+            ];
+            $this->session->set_userdata($session_data);
 
             // Redirect ke controller SiswaController method index
-            redirect('AuthSiswa/list');
+            redirect('/');
         } else {
             // Jika login gagal, tampilkan pesan error dan redirect ke halaman login
             $this->session->set_flashdata('error', 'NISN atau tanggal lahir salah.');
@@ -55,6 +56,7 @@ class AuthSiswa extends CI_Controller
         $result = $this->Siswa_Model->get_siswa();
         $data['siswa'] = $result[0];
         $data['total'] = $result[1];
+        $data['level'] = $this->session->userdata('level');
 
         $this->load->view('index', $data);
     }

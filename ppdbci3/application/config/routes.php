@@ -58,3 +58,5 @@ $route['admin/daftarPetugas'] = 'UserController/daftar_petugas';
 $route['/'] = 'SiswaController/';
 $route['admin/siswa/tambah'] = 'SiswaController/tambah';
 $route['auth/login-petugas'] = 'UserController/load_login_petugas';
+$route['auth/login-siswa'] = 'AuthSiswa/login';
+$route['auth/logout'] = 'UserController/logout';
