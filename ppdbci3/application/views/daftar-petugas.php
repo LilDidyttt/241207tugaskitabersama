@@ -39,14 +39,20 @@
                                 <h1 class="h4 text-gray-900 mb-4">Daftar Baru Petugas</h1>
                             </div>
 
-                            <?php if ($this->session->flashdata('error')): ?>
-                                <p style="color: red;"><?php echo $this->session->flashdata('error'); ?></p>
+                            <!-- Tampilkan pesan error -->
+                            <?php if ($this->session->flashdata('errors')): ?>
+                                <div style="color: red;">
+                                    <?php echo $this->session->flashdata('errors'); ?>
+                                </div>
                             <?php endif; ?>
 
-                            <!-- Menampilkan pesan sukses jika ada -->
+                            <!-- Tampilkan pesan sukses (jika ada) -->
                             <?php if ($this->session->flashdata('success')): ?>
-                                <p style="color: green;"><?php echo $this->session->flashdata('success'); ?></p>
+                                <div style="color: green;">
+                                    <?php echo $this->session->flashdata('success'); ?>
+                                </div>
                             <?php endif; ?>
+
 
                             <form class="user" method="post" action="<?= base_url('UserController/addNewPetugas') ?>">
                                 <div class="form-group">

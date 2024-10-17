@@ -24,6 +24,7 @@ class SiswaController extends CI_Controller
         $result = $this->Siswa_Model->get_siswa();
         $data['siswa'] = $result[0];
         $data['total'] = $result[1];
+        $data['level'] = $this->session->userdata('level');
 
         $this->load->view('index', $data);
     }

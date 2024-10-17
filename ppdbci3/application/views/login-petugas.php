@@ -44,15 +44,28 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Login Sebagai Petugas!</h1>
                                     </div>
-                                    <form class="user">
+                                    <?php if ($this->session->flashdata('error')): ?>
+                                        <div style="color: red;">
+                                            <?php echo $this->session->flashdata('error'); ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <!-- Tampilkan pesan sukses jika ada -->
+                                    <?php if ($this->session->flashdata('success')): ?>
+                                        <div style="color: green;">
+                                            <?php echo $this->session->flashdata('success'); ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <form class="user" method="post" action="<?= base_url('UserController/loginPetugas') ?>">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Username">
+                                                placeholder="Username" name="username">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                                id="exampleInputPassword" placeholder="Password" name="password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -61,10 +74,11 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block" style="font-size: 1.2rem;">
-                                            Login
-                                        </a>
+                                        <input type="submit" name="login" value="Login" class="btn btn-primary btn-user btn-block" style="font-size: 1.2rem;">
                                     </form>
+                                    <div class="text-center mt-3">
+                                        <a class="small" href="#">Login sebagai siswa</a>
+                                    </div>
                                     <hr>
                                 </div>
                             </div>
