@@ -7,7 +7,9 @@ class Siswa_Model extends CI_Model
     public function get_siswa()
     {
         $query = $this->db->get('tb_calonsiswa');
-        return $query->result_array(); // Mengembalikan data dalam bentuk array asosiatif
+        $total_rows = $query->num_rows();
+        $row = $query->result_array();
+        return array($row, $total_rows); // Mengembalikan data dalam bentuk array asosiatif
     }
 
     // Menyimpan data siswa ke database

@@ -21,7 +21,10 @@ class SiswaController extends CI_Controller
 
     public function index()
     {
-        $data['siswa'] = $this->Siswa_Model->get_siswa();
+        $result = $this->Siswa_Model->get_siswa();
+        $data['siswa'] = $result[0];
+        $data['total'] = $result[1];
+
         $this->load->view('index', $data);
     }
 
