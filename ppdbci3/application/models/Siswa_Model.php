@@ -3,6 +3,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Siswa_Model extends CI_Model
 {
+    //Login Siswa
+    public function login_siswa($nisn, $tanggal_lahir)
+    {
+        $this->db->where('nisn', $nisn);
+        $this->db->where('tgl_lahir', $tanggal_lahir);
+        $query = $this->db->get('tb_calonsiswa');
+        return $query->row(); // Mengembalikan satu baris data
+    }
+
     // Mendapatkan semua data siswa
     public function get_siswa()
     {
