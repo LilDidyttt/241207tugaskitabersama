@@ -14,6 +14,10 @@ class SiswaController extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if (!$this->session->userdata('logged_in')) {
+            // Jika belum login, redirect ke halaman login
+            redirect('auth/login-siswa');
+        }
         $this->load->model('Siswa_Model'); // Load model Siswa_Model
         $this->load->library('upload');    // Load library upload
         $this->load->library('session');   // Load session
@@ -25,13 +29,15 @@ class SiswaController extends CI_Controller
         $data['siswa'] = $result[0];
         $data['total'] = $result[1];
         $data['level'] = $this->session->userdata('level');
+        $data['username'] = $this->session->userdata('username');
+        $data['nama'] = $this->session->userdata('nama');
 
         $this->load->view('index', $data);
     }
 
     public function tambah()
     {
-        $this->load->view('admin/siswa/tambah');
+        $this->load->view('admin/siswa/tambah_siswa');
     }
 
     public function store()
@@ -120,7 +126,7 @@ class SiswaController extends CI_Controller
             redirect('admin/siswa');
         } else {
             // Load the edit view with the student data
-            $this->load->view('admin/siswa/edit', $data);
+            $this->load->view('admin/siswa/edit_siswa', $data);
         }
     }
 

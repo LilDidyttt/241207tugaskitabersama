@@ -44,20 +44,19 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Login Sebagai Petugas!</h1>
                                     </div>
+                                    <!-- Menampilkan Flash Data (Pesan Error/Sukses) -->
                                     <?php if ($this->session->flashdata('error')): ?>
-                                        <div style="color: red;">
+                                        <div class="alert alert-danger" role="alert">
                                             <?php echo $this->session->flashdata('error'); ?>
                                         </div>
-                                    <?php endif; ?>
-
-                                    <!-- Tampilkan pesan sukses jika ada -->
-                                    <?php if ($this->session->flashdata('success')): ?>
-                                        <div style="color: green;">
+                                    <?php elseif ($this->session->flashdata('success')): ?>
+                                        <div class="alert alert-success" role="alert">
                                             <?php echo $this->session->flashdata('success'); ?>
                                         </div>
                                     <?php endif; ?>
+                                    <!-- End Flash Data -->
 
-                                    <form class="user" method="post" action="<?= base_url('UserController/loginPetugas') ?>">
+                                    <form class="user" method="post" action="<?= base_url('AuthController/loginPetugas') ?>">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"

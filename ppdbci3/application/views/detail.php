@@ -10,7 +10,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>SB Admin 2 - Blank</title>
+    <title>PPDB - Detail Siswa</title>
 
     <!-- Custom fonts for this template-->
     <link
@@ -44,7 +44,8 @@
             <!-- Main Content -->
             <div id="content">
                 <!-- Topbar -->
-                <?php include "template/topbar.php"; ?>
+                <?php include "template/topbar.php" ?>
+
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->

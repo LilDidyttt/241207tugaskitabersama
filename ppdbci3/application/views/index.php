@@ -24,6 +24,43 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/css/sb-admin-2.min.css'); ?>" rel="stylesheet">
 
+    <link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.css') ?>" rel="stylesheet">
+
+    <style>
+        /* Target input search di DataTables */
+        .dataTables_filter input {
+            width: 500px;
+            /* Memperlebar search box */
+            padding: 10px;
+            /* Menambahkan padding */
+            border: 1px solid darkblue;
+            /* Border biru */
+            border-radius: 5px;
+            /* Membuat sudut membulat */
+            background-color: #f8f9fa;
+            /* Warna background lebih terang */
+            font-size: 16px;
+            /* Ukuran font lebih besar */
+        }
+
+        .dataTables_filter {
+            margin-bottom: 20px;
+            /* Jarak antara search bar dan tabel */
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            /* Memastikan scroll halus di perangkat mobile */
+        }
+
+        table {
+            width: 100%;
+            min-width: 600px;
+            /* Atur sesuai kebutuhan, agar tabel tidak terlalu sempit */
+        }
+    </style>
+
 </head>
 
 <body id="page-top">
@@ -98,12 +135,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <div class="container-fluid">
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Tabel Calon Siswa</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Tabel Calon Peserta Didik Baru</h6>
                                     </div>
 
                                     <!-- Tombol Tambah Data, Cetak PDF, dan Cetak Excel -->
                                     <div class="card-body">
-                                        <div class="mb-3">
+                                        <div class="mb-4">
 
                                             <?php if ($level == 'admin' || $level == 'petugas') : ?>
                                                 <a href="<?= site_url('admin/siswa/tambah') ?>" class="btn btn-primary">
@@ -117,8 +154,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                     <i class="fas fa-file-excel"></i> Cetak Excel
                                                 </a>
                                             <?php endif; ?>
-
                                         </div>
+
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                                                 <thead class="thead-light">
@@ -155,18 +192,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                                 <?php if ($level == 'admin' || $level == 'petugas') : ?>
 
                                                                     <a href="<?= site_url('SiswaController/edit/' . $s['no_daftar']) ?>"
-                                                                        class="btn btn-sm btn-primary">
+                                                                        class="btn btn-sm btn-primary mt-3">
                                                                         <i class="fas fa-edit"></i> Edit
                                                                     </a>
                                                                     <a href="<?= site_url('SiswaController/delete/' . $s['no_daftar']) ?>"
-                                                                        class="btn btn-sm btn-danger"
+                                                                        class="btn btn-sm btn-danger mt-3"
                                                                         onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                                                         <i class="fas fa-trash-alt"></i> Hapus
                                                                     </a>
                                                                 <?php endif; ?>
 
-                                                                <a href="<?= site_url('SiswaController/detail/' . $s['no_daftar']) ?>"
-                                                                    class="btn btn-sm btn-success">
+                                                                <a href="<?= site_url('siswa/detail/' . $s['no_daftar']) ?>"
+                                                                    class="btn btn-sm btn-success mt-3">
                                                                     <i class="fas fa-print"></i> Detail
                                                                 </a>
                                                             </td>
@@ -214,15 +251,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Keluar?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-body">Klik "Logout" jika ingin keluar.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <a class="btn btn-primary" href="<?= base_url('auth/logout') ?>">Logout</a>
                     </div>
                 </div>
             </div>
@@ -244,6 +281,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <!-- Page level custom scripts -->
         <script src="<?= base_url('assets/js/demo/chart-area-demo.js'); ?>"></script>
         <script src="<?= base_url('assets/js/demo/chart-pie-demo.js'); ?>"></script>
+
+        <script src="<?= base_url('assets/vendor/datatables/jquery.dataTables.min.js') ?>"></script>
+        <script src="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js') ?>"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="<?= base_url('assets/js/demo/datatables-demo.js') ?>"></script>
 
 </body>
 

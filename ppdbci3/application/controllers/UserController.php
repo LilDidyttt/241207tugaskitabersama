@@ -16,21 +16,15 @@ class UserController extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Siswa_Model'); // Load model Siswa_Model
         $this->load->model('User_Model'); // Load model Siswa_Model
         $this->load->library('upload');    // Load library upload
         $this->load->library('form_validation');
         $this->load->library('session');   // Load session
     }
 
-    public function load_login_petugas()
-    {
-        $this->load->view('login-petugas');
-    }
-
     public function daftar_petugas()
     {
-        $this->load->view('daftar-petugas');
+        $this->load->view('admin/daftar-petugas');
     }
 
     public function addNewPetugas()
@@ -43,7 +37,7 @@ class UserController extends CI_Controller
 
         if ($this->form_validation->run() === FALSE) {
             // Set error ke dalam flashdata
-            $this->session->set_flashdata('errors', validation_errors());
+            $this->session->set_flashdata('error', validation_errors());
 
             // Redirect kembali ke halaman register
             redirect('admin/daftarPetugas');
@@ -54,7 +48,7 @@ class UserController extends CI_Controller
             // Data untuk disimpan
             $data = [
                 'username' => $this->input->post('username'),
-                'username' => $this->input->post('username'),
+                'nama' => $this->input->post('nama'),
                 'password' => $password
             ];
 
@@ -76,56 +70,5 @@ class UserController extends CI_Controller
         } else {
             return TRUE;
         }
-    }
-
-    public function loginPetugas()
-    {
-        // Aturan validasi
-        $this->form_validation->set_rules('username', 'Username', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required');
-
-        if ($this->form_validation->run() === FALSE) {
-            // Jika validasi gagal
-            $this->load->view('login-petugas');
-        } else {
-            // Ambil data dari form
-            $username = $this->input->post('username');
-            $password = $this->input->post('password');
-
-            // Panggil model untuk verifikasi login
-            $user = $this->User_Model->login_user($username, $password);
-
-            if ($user) {
-                // Jika login berhasil, set session
-                $session_data = [
-                    'user_id' => $user->id,
-                    'username' => $user->username,
-                    'level' => $user->level,
-                    'logged_in' => TRUE
-                ];
-                $this->session->set_userdata($session_data);
-
-                // Redirect ke halaman yang diinginkan
-                redirect('/');
-            } else {
-                // Jika login gagal
-                $this->session->set_flashdata('error', 'Username atau password salah.');
-                redirect('auth/login-petugas');
-            }
-        }
-    }
-
-    // Fungsi logout
-    public function logout()
-    {
-        // Hapus session
-        $this->session->unset_userdata('logged_in');
-        $this->session->unset_userdata('user_id');
-        $this->session->unset_userdata('username');
-        $this->session->unset_userdata('level');
-
-        // Set pesan logout
-        $this->session->set_flashdata('success', 'Anda telah logout.');
-        redirect('auth/login-siswa');
     }
 }

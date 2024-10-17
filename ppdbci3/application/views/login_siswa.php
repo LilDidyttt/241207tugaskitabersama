@@ -57,7 +57,7 @@
                                     <!-- End Flash Data -->
 
                                     <!-- Form Login -->
-                                    <form class="user" action="<?php echo site_url('authsiswa/login_process'); ?>"
+                                    <form class="user" action="<?php echo site_url('AuthController/loginSiswa'); ?>"
                                         method="post">
                                         <!-- Input NISN -->
                                         <div class="form-group">

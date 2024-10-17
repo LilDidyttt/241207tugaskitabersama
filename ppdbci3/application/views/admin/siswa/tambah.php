@@ -5,93 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Siswa</title>
+    <!-- Custom fonts for this template-->
+    <link href="<?= base_url('assets/vendor/fontawesome-free/css/all.min.css'); ?>" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="<?= base_url('assets/css/sb-admin-2.min.css'); ?>" rel="stylesheet">
+
+    <link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.css') ?>" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            margin-bottom: 20px;
-            color: #2c3e50;
-        }
-
-        .form-row {
-            display: flex;
-            margin-bottom: 15px;
-        }
-
-        .form-group {
-            flex: 1;
-            margin-right: 15px;
-        }
-
-        .form-group:last-child {
-            margin-right: 0;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        textarea {
-            height: 100px;
-        }
-
-        button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #3498db;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
-        }
-
-        button:hover {
-            background-color: #2980b9;
-        }
-
-        @media (max-width: 600px) {
-            .form-row {
-                flex-direction: column;
-            }
-
-            .form-group {
-                margin-right: 0;
-                margin-bottom: 15px;
-            }
-        }
     </style>
 </head>
 
