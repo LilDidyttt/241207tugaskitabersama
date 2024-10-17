@@ -13,7 +13,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>PPDB - Dashboard</title>
+    <title>PPDB - Beranda</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url('assets/vendor/fontawesome-free/css/all.min.css'); ?>" rel="stylesheet" type="text/css">
@@ -141,6 +141,84 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <!-- Content Row -->
 
                     <div class="row">
+                        <div class="container-fluid">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">DataTables Siswa</h6>
+                                </div>
+
+                                <!-- Tombol Tambah Data, Cetak PDF, dan Cetak Excel -->
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <a href="<?= site_url('admin/siswa/tambah') ?>" class="btn btn-primary">
+                                            <i class="fas fa-plus"></i> Tambah Data
+                                        </a>
+
+                                        <a href="<?= site_url('admin/siswa/cetak_pdf') ?>" class="btn btn-secondary">
+                                            <i class="fas fa-file-pdf"></i> Cetak PDF
+                                        </a>
+                                        <a href="<?= site_url('admin/siswa/cetak_excel') ?>" class="btn btn-info">
+                                            <i class="fas fa-file-excel"></i> Cetak Excel
+                                        </a>
+
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>NISN</th>
+                                                    <th>NAMA</th>
+                                                    <th>Jenis Kelamin</th>
+                                                    <th>Alamat</th>
+                                                    <th>Sekolah Asal</th>
+                                                    <th>Foto</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $no = 1; ?>
+                                                <?php foreach ($siswa as $s): ?>
+                                                    <tr>
+                                                        <td><?= $no++ ?></td>
+                                                        <td><?= $s['nisn'] ?></td>
+                                                        <td><?= $s['nama'] ?></td>
+                                                        <td><?= $s['jk'] ?></td>
+                                                        <td><?= $s['alamat'] ?></td>
+                                                        <td><?= $s['sekolah_asal'] ?></td>
+                                                        <td>
+                                                            <?php if (!empty($s['foto'])): ?>
+                                                                <img src="<?= base_url('assets/uploads/' . $s['foto']) ?>" alt="Foto Siswa"
+                                                                    width="80" class="img-thumbnail">
+                                                            <?php else: ?>
+                                                                <span class="text-danger">Tidak ada foto</span>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <a href="<?= site_url('SiswaController/edit/' . $s['no_daftar']) ?>"
+                                                                class="btn btn-sm btn-primary">
+                                                                <i class="fas fa-edit"></i> Edit
+                                                            </a>
+                                                            <a href="<?= site_url('SiswaController/delete/' . $s['no_daftar']) ?>"
+                                                                class="btn btn-sm btn-danger"
+                                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                                <i class="fas fa-trash-alt"></i> Hapus
+                                                            </a>
+
+
+                                                            <a href="<?= site_url('SiswaController/detail/' . $s['no_daftar']) ?>"
+                                                                class="btn btn-sm btn-success">
+                                                                <i class="fas fa-print"></i> Detail
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">

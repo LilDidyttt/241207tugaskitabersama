@@ -22,11 +22,7 @@ class SiswaController extends CI_Controller
     public function index()
     {
         $data['siswa'] = $this->Siswa_Model->get_siswa();
-        $this->load->view('admin/siswa/index', $data);
-    }
-    public function blank()
-    {
-        $this->load->view('admin/siswa/blank');
+        $this->load->view('index', $data);
     }
 
     public function tambah()
@@ -169,10 +165,10 @@ class SiswaController extends CI_Controller
         // Jika siswa tidak ditemukan, redirect dengan pesan error
         if (!$data['siswa']) {
             $this->session->set_flashdata('error', 'Data siswa tidak ditemukan.');
-            redirect('admin/siswa');
+            redirect('siswa');
         } else {
             // Load view cetak_siswa.php dengan data siswa
-            $this->load->view('admin/siswa/detail', $data);
+            $this->load->view('detail', $data);
         }
     }
 }
