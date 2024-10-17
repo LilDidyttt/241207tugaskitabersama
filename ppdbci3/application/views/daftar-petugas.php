@@ -38,28 +38,36 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Daftar Baru Petugas</h1>
                             </div>
+
+                            <?php if ($this->session->flashdata('error')): ?>
+                                <p style="color: red;"><?php echo $this->session->flashdata('error'); ?></p>
+                            <?php endif; ?>
+
+                            <!-- Menampilkan pesan sukses jika ada -->
+                            <?php if ($this->session->flashdata('success')): ?>
+                                <p style="color: green;"><?php echo $this->session->flashdata('success'); ?></p>
+                            <?php endif; ?>
+
                             <form class="user" method="post" action="<?= base_url('UserController/addNewPetugas') ?>">
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                    <input type="text" class="form-control form-control-user" name="nama" id="exampleFirstName"
                                         placeholder="Nama Lengkap">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="exampleInputEmail"
+                                    <input type="text" class="form-control form-control-user" name="username" id="exampleInputEmail"
                                         placeholder="Username">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
+                                            id="exampleInputPassword" name="password" placeholder="Password">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Konfirmasi Password">
+                                            id="exampleRepeatPassword" name="konfir-password" placeholder="Konfirmasi Password">
                                     </div>
                                 </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    Daftar Petugas
-                                </a>
+                                <input type="submit" name="daftarPetugas" class="btn btn-primary btn-user btn-block" value="Daftar Petugas" style="font-size: 1.1rem;">
                             </form>
                             <hr>
                         </div>
