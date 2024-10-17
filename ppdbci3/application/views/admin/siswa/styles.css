@@ -1,0 +1,74 @@
+body {
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #e0f7fa; /* Light background for contrast */
+	margin: 0;
+	padding: 20px;
+}
+
+.container {
+	max-width: 600px;
+	margin: auto;
+	background: white;
+	padding: 20px;
+	border: 1px solid #009688; /* Use a color similar to KTP */
+	border-radius: 8px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+}
+
+h1 {
+	text-align: center;
+	color: #00796b; /* Darker shade for heading */
+	margin-bottom: 20px;
+}
+
+.ktp-container {
+	border: 2px solid #009688; /* Border around the table */
+	border-radius: 8px;
+	padding: 15px; /* Padding around the table */
+	background-color: #f9fbe7; /* Light background for table */
+}
+
+.ktp-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.ktp-table th,
+.ktp-table td {
+	border: 1px solid #00796b; /* Darker border color */
+	padding: 10px;
+	text-align: left;
+}
+
+.ktp-table th {
+	background-color: #00796b; /* Darker background for header */
+	color: white; /* White text for header */
+}
+
+.ktp-table td {
+	background-color: #e0f2f1; /* Slightly darker cell color */
+}
+
+.ktp-table img {
+	max-width: 80px; /* Adjusted size for better fit */
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Soft shadow for image */
+}
+
+.print-btn {
+	display: block;
+	width: 100%;
+	padding: 12px;
+	margin-top: 20px;
+	background-color: #007bff; /* Bootstrap primary color */
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 18px;
+	transition: background-color 0.3s;
+}
+
+.print-btn:hover {
+	background-color: #0056b3; /* Darker shade on hover */
+}

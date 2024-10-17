@@ -63,39 +63,39 @@
                         <tbody>
                             <?php $no = 1; ?>
                             <?php foreach ($siswa as $s): ?>
-                            <tr>
-                                <td><?= $no++ ?></td>
-                                <td><?= $s['nisn'] ?></td>
-                                <td><?= $s['nama'] ?></td>
-                                <td><?= $s['jk'] ?></td>
-                                <td><?= $s['alamat'] ?></td>
-                                <td><?= $s['sekolah_asal'] ?></td>
-                                <td>
-                                    <?php if (!empty($s['foto'])): ?>
-                                    <img src="<?= base_url('assets/uploads/' . $s['foto']) ?>" alt="Foto Siswa"
-                                        width="50" class="img-thumbnail">
-                                    <?php else: ?>
-                                    <span class="text-danger">Tidak ada foto</span>
-                                    <?php endif; ?>
-                                </td>
-                                <td>
-                                    <a href="<?= site_url('SiswaController/edit/' . $s['no_daftar']) ?>"
-                                        class="btn btn-sm btn-primary">
-                                        <i class="fas fa-edit"></i> Edit
-                                    </a>
-                                    <a href="<?= site_url('SiswaController/delete/' . $s['no_daftar']) ?>"
-                                        class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                        <i class="fas fa-trash-alt"></i> Hapus
-                                    </a>
+                                <tr>
+                                    <td><?= $no++ ?></td>
+                                    <td><?= $s['nisn'] ?></td>
+                                    <td><?= $s['nama'] ?></td>
+                                    <td><?= $s['jk'] ?></td>
+                                    <td><?= $s['alamat'] ?></td>
+                                    <td><?= $s['sekolah_asal'] ?></td>
+                                    <td>
+                                        <?php if (!empty($s['foto'])): ?>
+                                            <img src="<?= base_url('assets/uploads/' . $s['foto']) ?>" alt="Foto Siswa"
+                                                width="50" class="img-thumbnail">
+                                        <?php else: ?>
+                                            <span class="text-danger">Tidak ada foto</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <a href="<?= site_url('SiswaController/edit/' . $s['no_daftar']) ?>"
+                                            class="btn btn-sm btn-primary">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <a href="<?= site_url('SiswaController/delete/' . $s['no_daftar']) ?>"
+                                            class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                            <i class="fas fa-trash-alt"></i> Hapus
+                                        </a>
 
 
-                                    <a href="<?= site_url('admin/siswa/cetak/' . $s['no_daftar']) ?>"
-                                        class="btn btn-sm btn-success">
-                                        <i class="fas fa-print"></i> Cetak
-                                    </a>
-                                </td>
-                            </tr>
+                                        <a href="<?= site_url('SiswaController/detail/' . $s['no_daftar']) ?>"
+                                            class="btn btn-sm btn-success">
+                                            <i class="fas fa-print"></i> Detail
+                                        </a>
+                                    </td>
+                                </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
