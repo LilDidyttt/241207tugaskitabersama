@@ -19,6 +19,7 @@ class SiswaController extends CI_Controller
             redirect('auth/login-siswa');
         }
         $this->load->model('Siswa_Model'); // Load model Siswa_Model
+        $this->load->model('User_Model'); // Load model Siswa_Model
         $this->load->library('upload');    // Load library upload
         $this->load->library('session');   // Load session
     }
@@ -27,10 +28,15 @@ class SiswaController extends CI_Controller
     {
         $result = $this->Siswa_Model->get_siswa();
         $data['siswa'] = $result[0];
-        $data['total'] = $result[1];
+        $data['total_siswa'] = $result[1];
         $data['level'] = $this->session->userdata('level');
         $data['username'] = $this->session->userdata('username');
         $data['nama'] = $this->session->userdata('nama');
+
+
+        $resultPetugas = $this->User_Model->get_petugas();
+        $data['petugas'] = $resultPetugas[0];
+        $data['total_petugas'] = $resultPetugas[1];
 
         $this->load->view('index', $data);
     }

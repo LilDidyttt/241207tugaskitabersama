@@ -27,6 +27,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.css') ?>" rel="stylesheet">
 
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+
         /* Target input search di DataTables */
         .dataTables_filter input {
             width: 500px;
@@ -70,13 +75,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
         <?php include "template/nav.php" ?>
 
+
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
-
                 <?php include "template/topbar.php" ?>
+
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -99,7 +105,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Total Siswa</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $total ?> Siswa</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $total_siswa ?> Siswa</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-user-graduate fa-2x text-gray-500"></i>
@@ -118,7 +124,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                     Total Petugas</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">2 Petugas</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $total_petugas ?> Petugas</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-user-tie fa-2x text-gray-500"></i>
@@ -131,87 +137,169 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                         <!-- Content Row -->
 
-                        <div class="row">
-                            <div class="container-fluid">
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Tabel Calon Peserta Didik Baru</h6>
+                        <div class="container-fluid" id="tabel-siswa">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Tabel Petugas PPDB</h6>
+                                </div>
+
+                                <!-- Tombol Tambah Data, Cetak PDF, dan Cetak Excel -->
+                                <div class="card-body">
+                                    <div class="mb-4">
+
+                                        <?php if ($level == 'admin' || $level == 'petugas') : ?>
+                                            <a href="<?= site_url('admin/siswa/tambah') ?>" class="btn btn-primary">
+                                                <i class="fas fa-plus"></i> Tambah Data
+                                            </a>
+
+                                            <a href="<?= site_url('admin/siswa/cetak_pdf') ?>" class="btn btn-secondary">
+                                                <i class="fas fa-file-pdf"></i> Cetak PDF
+                                            </a>
+                                            <a href="<?= site_url('admin/siswa/cetak_excel') ?>" class="btn btn-info">
+                                                <i class="fas fa-file-excel"></i> Cetak Excel
+                                            </a>
+                                        <?php endif; ?>
                                     </div>
 
-                                    <!-- Tombol Tambah Data, Cetak PDF, dan Cetak Excel -->
-                                    <div class="card-body">
-                                        <div class="mb-4">
-
-                                            <?php if ($level == 'admin' || $level == 'petugas') : ?>
-                                                <a href="<?= site_url('admin/siswa/tambah') ?>" class="btn btn-primary">
-                                                    <i class="fas fa-plus"></i> Tambah Data
-                                                </a>
-
-                                                <a href="<?= site_url('admin/siswa/cetak_pdf') ?>" class="btn btn-secondary">
-                                                    <i class="fas fa-file-pdf"></i> Cetak PDF
-                                                </a>
-                                                <a href="<?= site_url('admin/siswa/cetak_excel') ?>" class="btn btn-info">
-                                                    <i class="fas fa-file-excel"></i> Cetak Excel
-                                                </a>
-                                            <?php endif; ?>
-                                        </div>
-
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
-                                                <thead class="thead-light">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>NISN</th>
+                                                    <th>NAMA</th>
+                                                    <th>Jenis Kelamin</th>
+                                                    <th>Alamat</th>
+                                                    <th>Sekolah Asal</th>
+                                                    <th>Foto</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $no = 1; ?>
+                                                <?php foreach ($siswa as $s): ?>
                                                     <tr>
-                                                        <th>No</th>
-                                                        <th>NISN</th>
-                                                        <th>NAMA</th>
-                                                        <th>Jenis Kelamin</th>
-                                                        <th>Alamat</th>
-                                                        <th>Sekolah Asal</th>
-                                                        <th>Foto</th>
-                                                        <th>Aksi</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php $no = 1; ?>
-                                                    <?php foreach ($siswa as $s): ?>
-                                                        <tr>
-                                                            <td><?= $no++ ?></td>
-                                                            <td><?= $s['nisn'] ?></td>
-                                                            <td><?= $s['nama'] ?></td>
-                                                            <td><?= $s['jk'] ?></td>
-                                                            <td><?= $s['alamat'] ?></td>
-                                                            <td><?= $s['sekolah_asal'] ?></td>
-                                                            <td>
-                                                                <?php if (!empty($s['foto'])): ?>
-                                                                    <img src="<?= base_url('assets/uploads/' . $s['foto']) ?>" alt="Foto Siswa"
-                                                                        width="80" class="img-thumbnail">
-                                                                <?php else: ?>
-                                                                    <span class="text-danger">Tidak ada foto</span>
-                                                                <?php endif; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php if ($level == 'admin' || $level == 'petugas') : ?>
+                                                        <td><?= $no++ ?></td>
+                                                        <td><?= $s['nisn'] ?></td>
+                                                        <td><?= $s['nama'] ?></td>
+                                                        <td><?= $s['jk'] ?></td>
+                                                        <td><?= $s['alamat'] ?></td>
+                                                        <td><?= $s['sekolah_asal'] ?></td>
+                                                        <td>
+                                                            <?php if (!empty($s['foto'])): ?>
+                                                                <img src="<?= base_url('assets/uploads/' . $s['foto']) ?>" alt="Foto Siswa"
+                                                                    width="80" class="img-thumbnail">
+                                                            <?php else: ?>
+                                                                <span class="text-danger">Tidak ada foto</span>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php if ($level == 'admin' || $level == 'petugas') : ?>
 
-                                                                    <a href="<?= site_url('SiswaController/edit/' . $s['no_daftar']) ?>"
-                                                                        class="btn btn-sm btn-primary mt-3">
-                                                                        <i class="fas fa-edit"></i> Edit
-                                                                    </a>
-                                                                    <a href="<?= site_url('SiswaController/delete/' . $s['no_daftar']) ?>"
-                                                                        class="btn btn-sm btn-danger mt-3"
-                                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                                                        <i class="fas fa-trash-alt"></i> Hapus
-                                                                    </a>
-                                                                <?php endif; ?>
-
-                                                                <a href="<?= site_url('siswa/detail/' . $s['no_daftar']) ?>"
-                                                                    class="btn btn-sm btn-success mt-3">
-                                                                    <i class="fas fa-print"></i> Detail
+                                                                <a href="<?= site_url('SiswaController/edit/' . $s['no_daftar']) ?>"
+                                                                    class="btn btn-sm btn-primary mt-3">
+                                                                    <i class="fas fa-edit"></i> Edit
                                                                 </a>
-                                                            </td>
-                                                        </tr>
-                                                    <?php endforeach; ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                                <a href="<?= site_url('SiswaController/delete/' . $s['no_daftar']) ?>"
+                                                                    class="btn btn-sm btn-danger mt-3"
+                                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                                    <i class="fas fa-trash-alt"></i> Hapus
+                                                                </a>
+                                                            <?php endif; ?>
+
+                                                            <a href="<?= site_url('siswa/detail/' . $s['no_daftar']) ?>"
+                                                                class="btn btn-sm btn-success mt-3">
+                                                                <i class="fas fa-print"></i> Detail
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container-fluid" id="tabel-siswa">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Tabel Calon Peserta Didik Baru</h6>
+                                </div>
+
+                                <!-- Tombol Tambah Data, Cetak PDF, dan Cetak Excel -->
+                                <div class="card-body">
+                                    <div class="mb-4">
+
+                                        <?php if ($level == 'admin' || $level == 'petugas') : ?>
+                                            <a href="<?= site_url('admin/siswa/tambah') ?>" class="btn btn-primary">
+                                                <i class="fas fa-plus"></i> Tambah Data
+                                            </a>
+
+                                            <a href="<?= site_url('admin/siswa/cetak_pdf') ?>" class="btn btn-secondary">
+                                                <i class="fas fa-file-pdf"></i> Cetak PDF
+                                            </a>
+                                            <a href="<?= site_url('admin/siswa/cetak_excel') ?>" class="btn btn-info">
+                                                <i class="fas fa-file-excel"></i> Cetak Excel
+                                            </a>
+                                        <?php endif; ?>
+                                    </div>
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>NISN</th>
+                                                    <th>NAMA</th>
+                                                    <th>Jenis Kelamin</th>
+                                                    <th>Alamat</th>
+                                                    <th>Sekolah Asal</th>
+                                                    <th>Foto</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $no = 1; ?>
+                                                <?php foreach ($siswa as $s): ?>
+                                                    <tr>
+                                                        <td><?= $no++ ?></td>
+                                                        <td><?= $s['nisn'] ?></td>
+                                                        <td><?= $s['nama'] ?></td>
+                                                        <td><?= $s['jk'] ?></td>
+                                                        <td><?= $s['alamat'] ?></td>
+                                                        <td><?= $s['sekolah_asal'] ?></td>
+                                                        <td>
+                                                            <?php if (!empty($s['foto'])): ?>
+                                                                <img src="<?= base_url('assets/uploads/' . $s['foto']) ?>" alt="Foto Siswa"
+                                                                    width="80" class="img-thumbnail">
+                                                            <?php else: ?>
+                                                                <span class="text-danger">Tidak ada foto</span>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php if ($level == 'admin' || $level == 'petugas') : ?>
+
+                                                                <a href="<?= site_url('SiswaController/edit/' . $s['no_daftar']) ?>"
+                                                                    class="btn btn-sm btn-primary mt-3">
+                                                                    <i class="fas fa-edit"></i> Edit
+                                                                </a>
+                                                                <a href="<?= site_url('SiswaController/delete/' . $s['no_daftar']) ?>"
+                                                                    class="btn btn-sm btn-danger mt-3"
+                                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                                    <i class="fas fa-trash-alt"></i> Hapus
+                                                                </a>
+                                                            <?php endif; ?>
+
+                                                            <a href="<?= site_url('siswa/detail/' . $s['no_daftar']) ?>"
+                                                                class="btn btn-sm btn-success mt-3">
+                                                                <i class="fas fa-print"></i> Detail
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>

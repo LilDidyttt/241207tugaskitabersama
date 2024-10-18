@@ -36,7 +36,7 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row justify-content-around">
                             <div class="col-lg-4 d-none d-lg-block ms-4 bg-login-image">
-                                <img src="<?= base_url('assets/img/register.png') ?>" class="img-fluid mt-2"
+                                <img src="<?= base_url('assets/img/login-petugas.png') ?>" class="img-fluid mt-2"
                                     alt="Image Login">
                             </div>
                             <div class="col-lg-6 mt-5">

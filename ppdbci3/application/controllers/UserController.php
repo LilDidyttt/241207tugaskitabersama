@@ -24,7 +24,7 @@ class UserController extends CI_Controller
 
     public function daftar_petugas()
     {
-        $this->load->view('admin/daftar-petugas');
+        $this->load->view('admin/petugas/daftar-petugas');
     }
 
     public function addNewPetugas()

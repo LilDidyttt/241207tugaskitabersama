@@ -14,7 +14,15 @@ class User_Model extends CI_Model
         return $query->num_rows() > 0 ? true : false;
     }
 
-    public function login_user($username, $password)
+    public function get_petugas()
+    {
+        $query = $this->db->get('tb_user');
+        $total_rows = $query->num_rows();
+        $row = $query->result_array();
+        return array($row, $total_rows); // Mengembalikan data dalam bentuk array asosiatif
+    }
+
+    public function login_petugas($username, $password)
     {
         // Ambil user berdasarkan username
         $this->db->where('username', $username);

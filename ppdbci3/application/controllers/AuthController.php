@@ -46,7 +46,7 @@ class AuthController extends CI_Controller
             $password = $this->input->post('password');
 
             // Panggil model untuk verifikasi login
-            $user = $this->User_Model->login_user($username, $password);
+            $user = $this->User_Model->login_petugas($username, $password);
 
             if ($user) {
                 // Jika login berhasil, set session
@@ -93,6 +93,7 @@ class AuthController extends CI_Controller
                 $session_data = [
                     'user_id' => $siswa->id,
                     'username' => $siswa->username,
+                    'nama' => $siswa->nama,
                     'level' => 'siswa',
                     'logged_in' => TRUE
                 ];
@@ -116,6 +117,7 @@ class AuthController extends CI_Controller
         $this->session->unset_userdata('user_id');
         $this->session->unset_userdata('username');
         $this->session->unset_userdata('level');
+        $this->session->unset_userdata('nama');
 
         // Set pesan logout
         $this->session->set_flashdata('success', 'Anda telah logout.');
