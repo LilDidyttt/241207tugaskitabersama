@@ -18,6 +18,23 @@ class AuthController extends CI_Controller
         $this->load->model('User_Model');
     }
 
+    public function index()
+    {
+        $result = $this->Siswa_Model->get_siswa();
+        $data['siswa'] = $result[0];
+        $data['total_siswa'] = $result[1];
+
+        $resultPetugas = $this->User_Model->get_petugas();
+        $data['petugas'] = $resultPetugas[0];
+        $data['total_petugas'] = $resultPetugas[1];
+
+        $data['level'] = $this->session->userdata('level');
+        $data['username'] = $this->session->userdata('username');
+        $data['nama'] = $this->session->userdata('nama');
+
+        $this->load->view('index', $data);
+    }
+
     // Fungsi untuk menampilkan halaman login
     public function view_login_siswa()
     {

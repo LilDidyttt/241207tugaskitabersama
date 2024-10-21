@@ -49,13 +49,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'SiswaController';
+$route['default_controller'] = 'AuthController';
 $route['404_override'] = 'custom404';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['admin/siswa'] = 'SiswaController/index';
 $route['admin/daftarPetugas'] = 'UserController/daftar_petugas';
-$route['/'] = 'SiswaController/';
+$route['/'] = 'AuthController/';
 $route['admin/siswa/tambah'] = 'SiswaController/tambah';
 $route['auth/login-petugas'] = 'AuthController/view_login_petugas';
 $route['auth/login-siswa'] = 'AuthController/view_login_siswa';
