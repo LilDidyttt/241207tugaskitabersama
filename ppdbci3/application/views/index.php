@@ -232,7 +232,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         <div class="mb-4">
 
                                             <?php if ($level == 'admin') : ?>
-                                                <a href="<?= site_url('admin/DaftarPetugas') ?>" class="btn btn-primary">
+                                                <a href="<?= site_url('admin/daftarPetugas') ?>" class="btn btn-primary">
                                                     <i class="fas fa-plus"></i> Tambah Data Petugas
                                                 </a>
 

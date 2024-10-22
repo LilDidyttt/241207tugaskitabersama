@@ -13,6 +13,7 @@ class AuthController extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+
         // Load model Siswa_Model
         $this->load->model('Siswa_Model');
         $this->load->model('User_Model');
@@ -20,6 +21,11 @@ class AuthController extends CI_Controller
 
     public function index()
     {
+        if (!$this->session->userdata('logged_in')) {
+            // Jika belum login, redirect ke halaman login
+            redirect('auth/login-siswa');
+        }
+
         $result = $this->Siswa_Model->get_siswa();
         $data['siswa'] = $result[0];
         $data['total_siswa'] = $result[1];

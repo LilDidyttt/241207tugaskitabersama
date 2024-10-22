@@ -14,10 +14,6 @@ class SiswaController extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if (!$this->session->userdata('logged_in')) {
-            // Jika belum login, redirect ke halaman login
-            redirect('auth/login-siswa');
-        }
         $this->load->model('Siswa_Model'); // Load model Siswa_Model
         $this->load->library('upload');    // Load library upload
         $this->load->library('session');   // Load session
