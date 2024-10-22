@@ -1,71 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Siswa</title>
+<html><head>
+    <title></title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
         table {
             width: 100%;
+            margin-top: 20px;
             border-collapse: collapse;
-            margin: 20px 0;
+        }
+        th {
+            text-align: center;
+            padding: 12px;
         }
 
-        table,
-        th,
-        td {
+        table, th, td {
             border: 1px solid black;
         }
-
-        th,
         td {
-            padding: 10px;
+            padding: 8px;
             text-align: left;
         }
-
-        th {
-            background-color: #f2f2f2;
-        }
     </style>
-</head>
+</head><body>
+    <h2 style="text-align:center;">Laporan Calon Peserta Didik Baru</h2>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <tr>
+        <th>No</th>
+        <th>NISN</th>
+        <th>Nama</th>
+        <th>Tanggal Lahir</th>
+        <th>Alamat</th>
+        <th>Sekolah Asal</th>
+        <th>Nomor HP</th>
+        <th>Email</th>
+        </tr>
 
-<body>
-    <h1>Data Calon Peserta Didik</h1>
-    <table>
-        <thead>
+        <?php 
+        $no = 1;
+        foreach ($siswa as $s) {
+            ?>
             <tr>
-                <th>No</th>
-                <th>NISN</th>
-                <th>Nama</th>
-                <th>Jenis Kelamin</th>
-                <th>Alamat</th>
-                <th>Sekolah Asal</th>
+                <td><?= $no ?></td>
+                <td><?= $s['nisn'] ?></td>
+                <td><?= $s['nama'] ?></td>
+                <td><?= $s['tgl_lahir'] ?></td>
+                <td><?= $s['alamat'] ?></td>
+                <td><?= $s['sekolah_asal'] ?></td>
+                <td><?= $s['nope'] ?></td>
+                <td><?= $s['email'] ?></td>
             </tr>
-        </thead>
-        <tbody>
-            <?php $no = 1;
-            foreach ($siswa as $s): ?>
-                <tr>
-                    <td><?= $no++ ?></td>
-                    <td><?= $s['nisn'] ?></td>
-                    <td><?= $s['nama'] ?></td>
-                    <td><?= $s['jk'] ?></td>
-                    <td><?= $s['alamat'] ?></td>
-                    <td><?= $s['sekolah_asal'] ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
+            <?php
+        } ?>
     </table>
-</body>
-
-</html>
+    <p>Total siswa: <?= $total_siswa ?></p>
+</body></html>

@@ -16,11 +16,24 @@ class User_Model extends CI_Model
 
     public function get_petugas()
     {
+        $this->db->where('level', 'petugas');
         $query = $this->db->get('tb_user');
         $total_rows = $query->num_rows();
         $row = $query->result_array();
         return array($row, $total_rows); // Mengembalikan data dalam bentuk array asosiatif
     }
+
+    public function getPetugasByID($no_daftar)
+    {
+        return $this->db->get_where('tb_user', ['id_user' => $no_daftar, 'level' => 'petugas'])->row_array();
+    }
+
+    public function updatePetugas($id, $data)
+    {
+        $this->db->where('id_user', $id);
+        $this->db->update('tb_user', $data);
+    }
+
 
     public function login_petugas($username, $password)
     {

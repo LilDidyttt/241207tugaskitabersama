@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>PPDB | Tambah Petugas</title>
+    <title>PPDB - Edit Petugas</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url('assets/vendor/fontawesome-free/css/all.min.css') ?>" rel="stylesheet" type="text/css">
@@ -19,7 +19,7 @@
 
     <link
         href="<?= base_url('assets/css/style.css'); ?>"
-        rel="stylesheet">
+        rel="stylesheet" />
 
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/css/sb-admin-2.min.css') ?>" rel="stylesheet">
@@ -67,7 +67,8 @@
 
                     <!-- Page Heading -->
                     <div class="container mt-5 form-container">
-                        <h2 class="mb-4 text-center">Form Tambah Petugas</h2>
+                        <h2>Edit Petugas</h2>
+
                         <!-- Menampilkan Flash Data (Pesan Error/Sukses) -->
                         <?php if ($this->session->flashdata('error')): ?>
                             <div class="alert alert-danger" role="alert">
@@ -79,34 +80,41 @@
                             </div>
                         <?php endif; ?>
                         <!-- End Flash Data -->
-                        <form action="<?= site_url('UserController/addNewPetugas') ?>" method="post" enctype="multipart/form-data">
 
+                        <form action="<?= site_url('UserController/UpdatePetugas/' . $petugas['id_user']) ?>" method="post"
+                            enctype="multipart/form-data">
                             <div class="form-row">
+
                                 <div class="form-group col-md-12">
-                                    <label for="nama">Nama Lengkap</label>
-                                    <input type="text" id="nama" name="nama" class="form-control" required>
+                                    <label for="id">Id Petugas</label>
+                                    <input type="text" name="id" id="id" class="form-control" value="<?= $petugas['id_user'] ?>" required readonly>
                                 </div>
                             </div>
-
                             <div class="form-row">
-                                <div class="form-group col-md-12">
+
+                                <div class="form-group col-md-6">
+                                    <label for="nama">Nama Lengkap</label>
+                                    <input type="text" name="nama" id="nama" class="form-control" value="<?= $petugas['nama'] ?>" required>
+                                </div>
+                                <div class="form-group col-md-6">
                                     <label for="username">Username</label>
-                                    <input type="text" id="username" name="username" class="form-control" required>
+                                    <input type="text" name="username" id="username" class="form-control" value="<?= $petugas['username'] ?>" required>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="password">Password</label>
-                                    <input type="password" id="password" name="password" class="form-control" required>
+                                    <label class="d-block text-danger">* Kosongkan jika tidak ingin mengganti kata sandi</label>
+                                    <input type="password" name="password" id="password" class="form-control">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="konfir-password">Konfirmasi Password</label>
-                                    <input type="password" id="konfir-password" name="konfir-password" class="form-control" required>
+                                    <label class="d-block text-danger">* Kosongkan jika tidak ingin mengganti kata sandi</label>
+                                    <input type="password" name="konfir-password" id="konfir-password" class="form-control">
                                 </div>
                             </div>
-
-                            <button type="submit" class="btn btn-primary btn-block">Tambah Petugas</button>
+                            <button type="submit" class="btn btn-primary btn-block">Update Petugas</button>
                         </form>
                     </div>
 

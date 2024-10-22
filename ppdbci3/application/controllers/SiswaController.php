@@ -1,6 +1,12 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+require_once APPPATH . '../vendor/autoload.php';
+
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 
 /**
  * @property CI_Loader $load
@@ -62,7 +68,7 @@ class SiswaController extends CI_Controller
             }
 
             // Redirect ke halaman daftar siswa
-            redirect('admin/siswa');
+            redirect('/');
         } else {
             // Jika gagal upload, tampilkan pesan error
             $this->session->set_flashdata('error', $this->upload->display_errors());
@@ -89,13 +95,14 @@ class SiswaController extends CI_Controller
 
             // Hapus data siswa
             $result = $this->Siswa_Model->deleteByNoDaftar($no_daftar);
+            $this->session->set_flashdata('success', 'Data siswa berhasil dihapus.');
         } else {
             // Jika siswa tidak ditemukan
             $this->session->set_flashdata('error', 'Data siswa tidak ditemukan.');
         }
 
         // Redirect ke halaman daftar siswa
-        redirect('admin/siswa');
+        redirect('/');
     }
 
 
@@ -150,14 +157,18 @@ class SiswaController extends CI_Controller
             $this->session->set_flashdata('error', 'Gagal mengupdate data siswa.');
         }
 
-        redirect('admin/siswa');
+        redirect('/');
     }
 
     public function cetak_pdf()
     {
         $this->load->library('dompdf_gen'); // Load library dompdf
-        $data['siswa'] = $this->Siswa_Model->get_siswa(); // Ambil data siswa
+
+        $result = $this->Siswa_Model->get_siswa();
+        $data['siswa'] = $result[0];
+        $data['total_siswa'] = $result[1];
         $this->load->view('laporan_pdf', $data); // Panggil view untuk PDF
+
         $paper_size = 'A4';
         $orientation = 'landscape';
         $html = $this->output->get_output();
@@ -165,8 +176,86 @@ class SiswaController extends CI_Controller
 
         $this->dompdf->load_html($html);
         $this->dompdf->render(); // Render PDF
-        $this->dompdf->stream("Data_Siswa.pdf", array("attachment" => 0)); // Tampilkan PDF
+        $this->dompdf->stream("Laporan_siswa_ppdb.pdf", array("Attachment" => 0)); // Tampilkan PDF
     }
+
+    public function cetak_excel()
+    {
+        // Ambil data siswa dari model
+        $result = $this->Siswa_Model->get_siswa();
+        $data['siswa'] = $result[0];
+        $data['total_siswa'] = $result[1];
+
+        // Buat objek Spreadsheet
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Set judul untuk worksheet
+        $sheet->setTitle('Data Siswa');
+
+        // Set header kolom
+        $headers = ['No', 'NISN', 'Nama', 'Jenis Kelamin', 'Alamat', 'Sekolah Asal'];
+        $sheet->fromArray($headers, NULL, 'A1');
+
+        // Mengatur gaya header
+        $headerStyle = [
+            'font' => [
+                'bold' => true,
+                'color' => ['argb' => 'FFFFFFFF'], // Warna font putih
+                'size' => 12,
+                'name' => 'Arial'
+            ],
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => ['argb' => 'FF0070C0'], // Warna latar belakang biru
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ]
+        ];
+
+        // Terapkan gaya ke header
+        $sheet->getStyle('A1:F1')->applyFromArray($headerStyle);
+
+        // Mengatur lebar kolom agar pas
+        $sheet->getColumnDimension('A')->setWidth(5);
+        $sheet->getColumnDimension('B')->setWidth(15);
+        $sheet->getColumnDimension('C')->setWidth(25);
+        $sheet->getColumnDimension('D')->setWidth(15);
+        $sheet->getColumnDimension('E')->setWidth(30);
+        $sheet->getColumnDimension('F')->setWidth(20);
+
+        // Mengisi data siswa
+        $row = 2; // Mulai dari baris ke-2
+        foreach ($data['siswa'] as $s) {
+            $sheet->setCellValue('A' . $row, $row - 1); // Nomor urut
+            $sheet->setCellValue('B' . $row, $s['nisn']);
+            $sheet->setCellValue('C' . $row, $s['nama']);
+            $sheet->setCellValue('D' . $row, $s['jk']);
+            $sheet->setCellValue('E' . $row, $s['alamat']);
+            $sheet->setCellValue('F' . $row, $s['sekolah_asal']);
+
+            // Format baris data
+            $sheet->getStyle('A' . $row . ':F' . $row)->applyFromArray([
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+                ]
+            ]);
+
+            $row++;
+        }
+
+        // Set header untuk download file
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="data_siswa.xlsx"');
+        header('Cache-Control: max-age=0');
+
+        // Buat writer dan simpan
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit; // Menghentikan eksekusi setelah mengirim file
+    }
+
 
     public function detail($no_daftar)
     {

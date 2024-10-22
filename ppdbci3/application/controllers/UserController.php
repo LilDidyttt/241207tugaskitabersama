@@ -59,9 +59,9 @@ class UserController extends CI_Controller
             $this->User_Model->insert_petugas($data);
 
             // Set pesan sukses
-            $this->session->set_flashdata('success', 'Registrasi Petugas Berhasil! <a href=' . base_url('') . '>Kembali</a>');
+            $this->session->set_flashdata('success', 'Registrasi Petugas Berhasil!');
 
-            redirect('admin/daftarPetugas');
+            redirect('/');
         }
     }
 
@@ -73,5 +73,88 @@ class UserController extends CI_Controller
         } else {
             return TRUE;
         }
+    }
+
+    // Edit
+    public function editPetugas($id_user)
+    {
+        // Fetch the student data based on 'no_daftar'
+        $data['petugas'] = $this->User_Model->getPetugasByID($id_user);
+
+        if (!$data['petugas']) {
+            // Redirect if no student found
+            $this->session->set_flashdata('error', 'Data Petugas Tidak Ditemukan.');
+            redirect('/');
+        } else {
+            // Load the edit view with the student data
+            $this->load->view('admin/petugas/edit_petugas', $data);
+        }
+    }
+
+    public function UpdatePetugas($id)
+    {
+        $this->form_validation->set_rules('password', 'Password', 'min_length[6]');
+
+        if ($this->form_validation->run() === FALSE) {
+            // Set error ke dalam flashdata
+            $this->session->set_flashdata('error', validation_errors());
+
+            // Redirect kembali ke halaman register
+            redirect('UserController/EditPetugas/' . $id);
+        } else {
+
+            // Ambil data dari form
+            $nama = $this->input->post('nama');
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+            $konfirPassword = $this->input->post('konfir-password');
+
+            // Siapkan array data untuk pembaruan
+            $dataUpdate = [
+                'nama' => $nama,
+                'username' => $username
+            ];
+
+            // Logika jika password tidak kosong
+            if (!empty($password) && !empty($konfirPassword)) {
+                // Cek apakah password dan konfirmasi password sama
+                if ($password === $konfirPassword) {
+                    // Hash password baru
+                    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                    // Tambahkan password baru ke dalam array data
+                    $dataUpdate['password'] = $hashedPassword;
+                } else {
+                    // Jika password tidak sama, beri pesan error
+                    $this->session->set_flashdata('error', 'Password dan konfirmasi password tidak cocok!');
+                    redirect('UserController/EditPetugas/' . $id);
+                }
+            }
+
+            // Panggil model untuk update data
+            $this->User_Model->updatePetugas($id, $dataUpdate);
+
+            // Redirect dengan pesan sukses
+            $this->session->set_flashdata('success', 'Update Petugas Berhasil!');
+
+            redirect('/');
+        }
+    }
+
+    public function deletePetugas($id_user)
+    {
+        // Cek apakah siswa dengan id_user tersebut ada
+        $siswa = $this->User_Model->getPetugasByID($id_user);
+
+        if ($siswa) {
+            // Hapus data siswa
+            $result = $this->Siswa_Model->deleteByNoDaftar($id_user);
+            $this->session->set_flashdata('success', 'Data petugas berhasil di hapus!.');
+        } else {
+            // Jika siswa tidak ditemukan
+            $this->session->set_flashdata('error', 'Data petugas tidak ditemukan.');
+        }
+
+        // Redirect ke halaman daftar siswa
+        redirect('/');
     }
 }

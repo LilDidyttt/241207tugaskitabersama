@@ -32,7 +32,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         }
 
         #mainContent {
-            margin-left: 16vw;
+            margin-left: 14vw;
         }
 
         /* Target input search di DataTables */
@@ -135,7 +135,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         </div>
 
                         <!-- Earnings (Monthly) Card Example -->
-                        <?php if ($level === 'admin') : ?>
+                        <?php if ($level === 'admin' || $level == 'petugas') : ?>
                             <div class="col-xl-5 col-md-6 mb-4">
                                 <div class="card border-left-success shadow h-100 py-2">
                                     <div class="card-body">
@@ -156,6 +156,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                         <!-- Content Row -->
 
+                        <!-- Menampilkan Flash Data (Pesan Error/Sukses) -->
+                        <div class="col-xl-10 col-md-12 mb-4">
+                            <?php if ($this->session->flashdata('error')): ?>
+                                <div class="alert alert-danger" role="alert">
+                                    <?php echo $this->session->flashdata('error'); ?>
+                                </div>
+                            <?php elseif ($this->session->flashdata('success')): ?>
+                                <div class="alert alert-success" role="alert">
+                                    <?php echo $this->session->flashdata('success'); ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+
+                        <!-- End Flash Data -->
+
                         <div class="container-fluid" id="tabel-siswa">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
@@ -171,7 +186,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                 <i class="fas fa-plus"></i> Tambah Data
                                             </a>
 
-                                            <a href="<?= site_url('admin/siswa/cetak_pdf') ?>" class="btn btn-danger">
+                                            <a href="<?= site_url('SiswaController/cetak_pdf') ?>" class="btn btn-danger">
                                                 <i class="fas fa-file-pdf"></i> Cetak PDF
                                             </a>
                                             <a href="<?= site_url('admin/siswa/cetak_excel') ?>" class="btn btn-success">
@@ -190,7 +205,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                     <th>Jenis Kelamin</th>
                                                     <th>Alamat</th>
                                                     <th>Sekolah Asal</th>
-                                                    <th>Foto</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -205,21 +219,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                         <td><?= $s['alamat'] ?></td>
                                                         <td><?= $s['sekolah_asal'] ?></td>
                                                         <td>
-                                                            <?php if (!empty($s['foto'])): ?>
-                                                                <img src="<?= base_url('assets/uploads/' . $s['foto']) ?>" alt="Foto Siswa"
-                                                                    width="80" class="img-thumbnail">
-                                                            <?php else: ?>
-                                                                <span class="text-danger">Tidak ada foto</span>
-                                                            <?php endif; ?>
-                                                        </td>
-                                                        <td>
                                                             <?php if ($level == 'admin' || $level == 'petugas') : ?>
 
-                                                                <a href="<?= site_url('SiswaController/edit/' . $s['no_daftar']) ?>"
+                                                                <a href="<?= site_url('siswa/edit/' . $s['no_daftar']) ?>"
                                                                     class="btn btn-sm btn-primary mt-3">
                                                                     <i class="fas fa-edit"></i> Edit
                                                                 </a>
-                                                                <a href="<?= site_url('SiswaController/delete/' . $s['no_daftar']) ?>"
+                                                                <a href="<?= site_url('siswa/delete/' . $s['no_daftar']) ?>"
                                                                     class="btn btn-sm btn-danger mt-3"
                                                                     onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                                                     <i class="fas fa-trash-alt"></i> Hapus
@@ -272,8 +278,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                         <th>ID USER</th>
                                                         <th>NAMA</th>
                                                         <th>USERNAME</th>
-                                                        <th>LEVEL</th>
-                                                        <th>Aksi</th>
+                                                        <?php if ($level == 'admin') : ?>
+                                                            <th>Aksi</th>
+                                                        <?php endif; ?>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -284,26 +291,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                             <td><?= $p['id_user'] ?></td>
                                                             <td><?= $p['nama'] ?></td>
                                                             <td><?= $p['username'] ?></td>
-                                                            <td><?= $p['level'] ?></td>
-                                                            <td>
-                                                                <?php if ($level == 'admin') : ?>
-
-                                                                    <a href="<?= site_url('SiswaController/edit/' . $s['no_daftar']) ?>"
+                                                            <?php if ($level == 'admin') : ?>
+                                                                <td>
+                                                                    <a href="<?= site_url('admin/editPetugas/' . $p['id_user']) ?>"
                                                                         class="btn btn-sm btn-primary mt-3">
                                                                         <i class="fas fa-edit"></i> Edit
                                                                     </a>
-                                                                    <a href="<?= site_url('SiswaController/delete/' . $s['no_daftar']) ?>"
+                                                                    <a href="<?= site_url('admin/deletePetugas/' . $p['id_user']) ?>"
                                                                         class="btn btn-sm btn-danger mt-3"
                                                                         onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                                                         <i class="fas fa-trash-alt"></i> Hapus
                                                                     </a>
-                                                                <?php endif; ?>
-
-                                                                <a href="<?= site_url('siswa/detail/' . $s['no_daftar']) ?>"
-                                                                    class="btn btn-sm btn-success mt-3">
-                                                                    <i class="fas fa-print"></i> Detail
-                                                                </a>
-                                                            </td>
+                                                                </td>
+                                                            <?php endif; ?>
                                                         </tr>
                                                     <?php endforeach; ?>
                                                 </tbody>
