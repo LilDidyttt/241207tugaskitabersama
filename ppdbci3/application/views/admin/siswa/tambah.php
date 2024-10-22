@@ -20,7 +20,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" id="mainContent">
         <h2>Form Tambah Siswa</h2>
 
 

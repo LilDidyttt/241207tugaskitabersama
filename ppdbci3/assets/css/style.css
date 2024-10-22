@@ -1,0 +1,56 @@
+html {
+    scroll-behavior: smooth;
+}
+
+#mainContent {
+    margin-left: 10vw;
+}
+
+/* Target input search di DataTables */
+.dataTables_filter input {
+    width: 500px;
+    /* Memperlebar search box */
+    padding: 10px;
+    /* Menambahkan padding */
+    border: 1px solid darkblue;
+    /* Border biru */
+    border-radius: 5px;
+    /* Membuat sudut membulat */
+    background-color: #f8f9fa;
+    /* Warna background lebih terang */
+    font-size: 16px;
+    /* Ukuran font lebih besar */
+}
+
+.dataTables_filter {
+    margin-bottom: 20px;
+    /* Jarak antara search bar dan tabel */
+}
+
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Memastikan scroll halus di perangkat mobile */
+}
+
+table {
+    width: 80%;
+    min-width: 600px;
+    /* Atur sesuai kebutuhan, agar tabel tidak terlalu sempit */
+}
+
+#tabel-siswa {
+    margin-left: 0vw;
+    width: 86%;
+}
+
+@media (max-width: 768px) {
+    #mainContent {
+        margin-left: 0vw;
+    }
+
+    #tabel-siswa {
+        margin-left: 0vw;
+        width: 100%;
+    }
+}

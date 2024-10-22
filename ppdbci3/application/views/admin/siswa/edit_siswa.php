@@ -17,12 +17,16 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
+    <link
+        href="<?= base_url('assets/css/style.css'); ?>"
+        rel="stylesheet" />
+
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/css/sb-admin-2.min.css') ?>" rel="stylesheet">
 
     <style>
         .form-container {
-            max-width: 87%;
+            max-width: 80%;
             /* Maksimal lebar form */
             margin: auto;
             /* Pusatkan form */
@@ -59,7 +63,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid" id="mainContent">
 
                     <!-- Page Heading -->
                     <div class="container mt-5 form-container">

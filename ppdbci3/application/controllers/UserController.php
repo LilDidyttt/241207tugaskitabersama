@@ -24,6 +24,9 @@ class UserController extends CI_Controller
 
     public function daftar_petugas()
     {
+        if ($this->session->userdata('level') != "admin") {
+            redirect('/');
+        }
         $this->load->view('admin/petugas/daftar-petugas');
     }
 

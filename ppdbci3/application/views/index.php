@@ -31,6 +31,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
             scroll-behavior: smooth;
         }
 
+        #mainContent {
+            margin-left: 16vw;
+        }
 
         /* Target input search di DataTables */
         .dataTables_filter input {
@@ -60,9 +63,25 @@ defined('BASEPATH') or exit('No direct script access allowed');
         }
 
         table {
-            width: 100%;
+            width: 80%;
             min-width: 600px;
             /* Atur sesuai kebutuhan, agar tabel tidak terlalu sempit */
+        }
+
+        #tabel-siswa {
+            margin-left: 0vw;
+            width: 86%;
+        }
+
+        @media (max-width: 768px) {
+            #mainContent {
+                margin-left: 0vw;
+            }
+
+            #tabel-siswa {
+                margin-left: 0vw;
+                width: 100%;
+            }
         }
     </style>
 
@@ -85,7 +104,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid" id="mainContent">
 
                     <!-- Page Heading -->
                     <div class="d-block align-items-center mb-4">
