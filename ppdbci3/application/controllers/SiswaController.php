@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+
 /**
  * @property CI_Loader $load
  * @property CI_DB_query_builder|CI_DB_mysqli_driver $db
@@ -151,6 +152,22 @@ class SiswaController extends CI_Controller
 
         redirect('admin/siswa');
     }
+
+    public function cetak_pdf()
+    {
+        $this->load->library('dompdf_gen'); // Load library dompdf
+        $data['siswa'] = $this->Siswa_Model->get_siswa(); // Ambil data siswa
+        $this->load->view('laporan_pdf', $data); // Panggil view untuk PDF
+        $paper_size = 'A4';
+        $orientation = 'landscape';
+        $html = $this->output->get_output();
+        $this->dompdf->set_paper($paper_size, $orientation);
+
+        $this->dompdf->load_html($html);
+        $this->dompdf->render(); // Render PDF
+        $this->dompdf->stream("Data_Siswa.pdf", array("attachment" => 0)); // Tampilkan PDF
+    }
+
     public function detail($no_daftar)
     {
         // Ambil data siswa berdasarkan no_daftar
