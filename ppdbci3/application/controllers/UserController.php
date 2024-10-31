@@ -157,4 +157,7 @@ class UserController extends CI_Controller
         // Redirect ke halaman daftar siswa
         redirect('/');
     }
+
+    //cetak petugas
+
 }

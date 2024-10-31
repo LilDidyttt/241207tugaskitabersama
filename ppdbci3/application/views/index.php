@@ -27,62 +27,62 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.css') ?>" rel="stylesheet">
 
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
+    html {
+        scroll-behavior: smooth;
+    }
 
+    #mainContent {
+        margin-left: 14vw;
+    }
+
+    /* Target input search di DataTables */
+    .dataTables_filter input {
+        width: 500px;
+        /* Memperlebar search box */
+        padding: 10px;
+        /* Menambahkan padding */
+        border: 1px solid darkblue;
+        /* Border biru */
+        border-radius: 5px;
+        /* Membuat sudut membulat */
+        background-color: #f8f9fa;
+        /* Warna background lebih terang */
+        font-size: 16px;
+        /* Ukuran font lebih besar */
+    }
+
+    .dataTables_filter {
+        margin-bottom: 20px;
+        /* Jarak antara search bar dan tabel */
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        /* Memastikan scroll halus di perangkat mobile */
+    }
+
+    table {
+        width: 80%;
+        min-width: 600px;
+        /* Atur sesuai kebutuhan, agar tabel tidak terlalu sempit */
+    }
+
+    #tabel-siswa {
+        margin-left: 0vw;
+        width: 86%;
+    }
+
+    @media (max-width: 768px) {
         #mainContent {
-            margin-left: 14vw;
-        }
-
-        /* Target input search di DataTables */
-        .dataTables_filter input {
-            width: 500px;
-            /* Memperlebar search box */
-            padding: 10px;
-            /* Menambahkan padding */
-            border: 1px solid darkblue;
-            /* Border biru */
-            border-radius: 5px;
-            /* Membuat sudut membulat */
-            background-color: #f8f9fa;
-            /* Warna background lebih terang */
-            font-size: 16px;
-            /* Ukuran font lebih besar */
-        }
-
-        .dataTables_filter {
-            margin-bottom: 20px;
-            /* Jarak antara search bar dan tabel */
-        }
-
-        .table-responsive {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            /* Memastikan scroll halus di perangkat mobile */
-        }
-
-        table {
-            width: 80%;
-            min-width: 600px;
-            /* Atur sesuai kebutuhan, agar tabel tidak terlalu sempit */
+            margin-left: 0vw;
         }
 
         #tabel-siswa {
             margin-left: 0vw;
-            width: 86%;
+            width: 100%;
         }
-
-        @media (max-width: 768px) {
-            #mainContent {
-                margin-left: 0vw;
-            }
-
-            #tabel-siswa {
-                margin-left: 0vw;
-                width: 100%;
-            }
-        }
+    }
     </style>
 
 </head>
@@ -124,7 +124,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Total Siswa</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $total_siswa ?> Siswa</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $total_siswa ?>
+                                                Siswa</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-user-graduate fa-2x text-gray-500"></i>
@@ -136,22 +137,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                         <!-- Earnings (Monthly) Card Example -->
                         <?php if ($level === 'admin' || $level == 'petugas') : ?>
-                            <div class="col-xl-5 col-md-6 mb-4">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Total Petugas</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $total_petugas ?> Petugas</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-user-tie fa-2x text-gray-500"></i>
-                                            </div>
+                        <div class="col-xl-5 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Total Petugas</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $total_petugas ?>
+                                                Petugas</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-user-tie fa-2x text-gray-500"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         <?php endif; ?>
 
                         <!-- Content Row -->
@@ -159,13 +161,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <!-- Menampilkan Flash Data (Pesan Error/Sukses) -->
                         <div class="col-xl-10 col-md-12 mb-4">
                             <?php if ($this->session->flashdata('error')): ?>
-                                <div class="alert alert-danger" role="alert">
-                                    <?php echo $this->session->flashdata('error'); ?>
-                                </div>
+                            <div class="alert alert-danger" role="alert">
+                                <?php echo $this->session->flashdata('error'); ?>
+                            </div>
                             <?php elseif ($this->session->flashdata('success')): ?>
-                                <div class="alert alert-success" role="alert">
-                                    <?php echo $this->session->flashdata('success'); ?>
-                                </div>
+                            <div class="alert alert-success" role="alert">
+                                <?php echo $this->session->flashdata('success'); ?>
+                            </div>
                             <?php endif; ?>
                         </div>
 
@@ -182,21 +184,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <div class="mb-4">
 
                                         <?php if ($level == 'admin' || $level == 'petugas') : ?>
-                                            <a href="<?= site_url('admin/siswa/tambah') ?>" class="btn btn-primary">
-                                                <i class="fas fa-plus"></i> Tambah Data
-                                            </a>
+                                        <a href="<?= site_url('admin/siswa/tambah') ?>" class="btn btn-primary">
+                                            <i class="fas fa-plus"></i> Tambah Data
+                                        </a>
 
-                                            <a href="<?= site_url('SiswaController/cetak_pdf') ?>" class="btn btn-danger">
-                                                <i class="fas fa-file-pdf"></i> Cetak PDF
-                                            </a>
-                                            <a href="<?= site_url('admin/siswa/cetak_excel') ?>" class="btn btn-success">
-                                                <i class="fas fa-file-excel"></i> Cetak Excel
-                                            </a>
+                                        <a href="<?= site_url('SiswaController/cetak_pdf') ?>" class="btn btn-danger">
+                                            <i class="fas fa-file-pdf"></i> Cetak PDF
+                                        </a>
+                                        <a href="<?= site_url('admin/siswa/cetak_excel') ?>" class="btn btn-success">
+                                            <i class="fas fa-file-excel"></i> Cetak Excel
+                                        </a>
                                         <?php endif; ?>
                                     </div>
 
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                                        <table class="table table-bordered table-striped" id="dataTable" width="100%"
+                                            cellspacing="0">
                                             <thead class="thead-light">
                                                 <tr>
                                                     <th>No</th>
@@ -211,33 +214,33 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             <tbody>
                                                 <?php $no = 1; ?>
                                                 <?php foreach ($siswa as $s): ?>
-                                                    <tr>
-                                                        <td><?= $no++ ?></td>
-                                                        <td><?= $s['nisn'] ?></td>
-                                                        <td><?= $s['nama'] ?></td>
-                                                        <td><?= $s['jk'] ?></td>
-                                                        <td><?= $s['alamat'] ?></td>
-                                                        <td><?= $s['sekolah_asal'] ?></td>
-                                                        <td>
-                                                            <?php if ($level == 'admin' || $level == 'petugas') : ?>
+                                                <tr>
+                                                    <td><?= $no++ ?></td>
+                                                    <td><?= $s['nisn'] ?></td>
+                                                    <td><?= $s['nama'] ?></td>
+                                                    <td><?= $s['jk'] ?></td>
+                                                    <td><?= $s['alamat'] ?></td>
+                                                    <td><?= $s['sekolah_asal'] ?></td>
+                                                    <td>
+                                                        <?php if ($level == 'admin' || $level == 'petugas') : ?>
 
-                                                                <a href="<?= site_url('siswa/edit/' . $s['no_daftar']) ?>"
-                                                                    class="btn btn-sm btn-primary mt-3">
-                                                                    <i class="fas fa-edit"></i> Edit
-                                                                </a>
-                                                                <a href="<?= site_url('siswa/delete/' . $s['no_daftar']) ?>"
-                                                                    class="btn btn-sm btn-danger mt-3"
-                                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                                                    <i class="fas fa-trash-alt"></i> Hapus
-                                                                </a>
-                                                            <?php endif; ?>
+                                                        <a href="<?= site_url('siswa/edit/' . $s['no_daftar']) ?>"
+                                                            class="btn btn-sm btn-primary mt-3">
+                                                            <i class="fas fa-edit"></i> Edit
+                                                        </a>
+                                                        <a href="<?= site_url('siswa/delete/' . $s['no_daftar']) ?>"
+                                                            class="btn btn-sm btn-danger mt-3"
+                                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                            <i class="fas fa-trash-alt"></i> Hapus
+                                                        </a>
+                                                        <?php endif; ?>
 
-                                                            <a href="<?= site_url('siswa/detail/' . $s['no_daftar']) ?>"
-                                                                class="btn btn-sm btn-success mt-3">
-                                                                <i class="fas fa-print"></i> Detail
-                                                            </a>
-                                                        </td>
-                                                    </tr>
+                                                        <a href="<?= site_url('siswa/detail/' . $s['no_daftar']) ?>"
+                                                            class="btn btn-sm btn-success mt-3">
+                                                            <i class="fas fa-print"></i> Detail
+                                                        </a>
+                                                    </td>
+                                                </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
                                         </table>
@@ -246,72 +249,68 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
                         </div>
                         <?php if ($level == 'admin' || $level == 'petugas') : ?>
-                            <div class="container-fluid" id="tabel-siswa">
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Tabel Petugas PPDB</h6>
+                        <div class="container-fluid" id="tabel-siswa">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Tabel Petugas PPDB</h6>
+                                </div>
+
+                                <!-- Tombol Tambah Data, Cetak PDF, dan Cetak Excel -->
+                                <div class="card-body">
+                                    <div class="mb-4">
+
+                                        <?php if ($level == 'admin') : ?>
+                                        <a href="<?= site_url('admin/daftarPetugas') ?>" class="btn btn-primary">
+                                            <i class="fas fa-plus"></i> Tambah Data Petugas
+                                        </a>
+
+
+                                        <?php endif; ?>
                                     </div>
 
-                                    <!-- Tombol Tambah Data, Cetak PDF, dan Cetak Excel -->
-                                    <div class="card-body">
-                                        <div class="mb-4">
-
-                                            <?php if ($level == 'admin') : ?>
-                                                <a href="<?= site_url('admin/daftarPetugas') ?>" class="btn btn-primary">
-                                                    <i class="fas fa-plus"></i> Tambah Data Petugas
-                                                </a>
-
-                                                <a href="<?= site_url('admin/siswa/cetak_pdf') ?>" class="btn btn-danger">
-                                                    <i class="fas fa-file-pdf"></i> Cetak PDF
-                                                </a>
-                                                <a href="<?= site_url('admin/siswa/cetak_excel') ?>" class="btn btn-success">
-                                                    <i class="fas fa-file-excel"></i> Cetak Excel
-                                                </a>
-                                            <?php endif; ?>
-                                        </div>
-
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped" id="dataTablePetugas" width="100%" cellspacing="0">
-                                                <thead class="thead-light">
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>ID USER</th>
-                                                        <th>NAMA</th>
-                                                        <th>USERNAME</th>
-                                                        <?php if ($level == 'admin') : ?>
-                                                            <th>Aksi</th>
-                                                        <?php endif; ?>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php $no = 1; ?>
-                                                    <?php foreach ($petugas as $p): ?>
-                                                        <tr>
-                                                            <td><?= $no++ ?></td>
-                                                            <td><?= $p['id_user'] ?></td>
-                                                            <td><?= $p['nama'] ?></td>
-                                                            <td><?= $p['username'] ?></td>
-                                                            <?php if ($level == 'admin') : ?>
-                                                                <td>
-                                                                    <a href="<?= site_url('admin/editPetugas/' . $p['id_user']) ?>"
-                                                                        class="btn btn-sm btn-primary mt-3">
-                                                                        <i class="fas fa-edit"></i> Edit
-                                                                    </a>
-                                                                    <a href="<?= site_url('admin/deletePetugas/' . $p['id_user']) ?>"
-                                                                        class="btn btn-sm btn-danger mt-3"
-                                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                                                        <i class="fas fa-trash-alt"></i> Hapus
-                                                                    </a>
-                                                                </td>
-                                                            <?php endif; ?>
-                                                        </tr>
-                                                    <?php endforeach; ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="dataTablePetugas"
+                                            width="100%" cellspacing="0">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>ID USER</th>
+                                                    <th>NAMA</th>
+                                                    <th>USERNAME</th>
+                                                    <?php if ($level == 'admin') : ?>
+                                                    <th>Aksi</th>
+                                                    <?php endif; ?>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $no = 1; ?>
+                                                <?php foreach ($petugas as $p): ?>
+                                                <tr>
+                                                    <td><?= $no++ ?></td>
+                                                    <td><?= $p['id_user'] ?></td>
+                                                    <td><?= $p['nama'] ?></td>
+                                                    <td><?= $p['username'] ?></td>
+                                                    <?php if ($level == 'admin') : ?>
+                                                    <td>
+                                                        <a href="<?= site_url('admin/editPetugas/' . $p['id_user']) ?>"
+                                                            class="btn btn-sm btn-primary mt-3">
+                                                            <i class="fas fa-edit"></i> Edit
+                                                        </a>
+                                                        <a href="<?= site_url('admin/deletePetugas/' . $p['id_user']) ?>"
+                                                            class="btn btn-sm btn-danger mt-3"
+                                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                            <i class="fas fa-trash-alt"></i> Hapus
+                                                        </a>
+                                                    </td>
+                                                    <?php endif; ?>
+                                                </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         <?php endif; ?>
 
 

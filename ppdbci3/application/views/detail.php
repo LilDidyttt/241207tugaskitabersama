@@ -207,9 +207,7 @@
                     <br>
 
                     <br>
-                    <?php if ($this->session->userdata('level') == 'admin' || $this->session->userdata('level') == 'petugas') : ?>
-                        <button class="btn btn-primary" onclick="window.print()">Cetak</button>
-                    <?php endif; ?>
+                    <button class="btn btn-primary" onclick="window.print()">Cetak</button>
                     <a href="<?= base_url('/') ?>">
                         <button class="btn btn-warning">Kembali</button>
                     </a>

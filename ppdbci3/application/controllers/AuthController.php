@@ -6,6 +6,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_DB_query_builder|CI_DB_mysqli_driver $db
  * @property CI_Input $input
  * @property Siswa_Model $Siswa_Model
+ * @property User_Model $User_Model
  * @property CI_Session $session
  */
 class AuthController extends CI_Controller
@@ -22,7 +23,6 @@ class AuthController extends CI_Controller
     public function index()
     {
         if (!$this->session->userdata('logged_in')) {
-            // Jika belum login, redirect ke halaman login
             redirect('auth/login-siswa');
         }
 
@@ -38,8 +38,10 @@ class AuthController extends CI_Controller
         $data['username'] = $this->session->userdata('username');
         $data['nama'] = $this->session->userdata('nama');
 
-        $this->load->view('index', $data);
+        $this->load->view('index', $data); // Pastikan $data dikirim ke view
     }
+
+
 
     // Fungsi untuk menampilkan halaman login
     public function view_login_siswa()

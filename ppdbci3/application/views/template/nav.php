@@ -64,31 +64,29 @@
     <li class="nav-item">
         <a class="nav-link" href="#tabel-siswa">
             <i class="fas fa-fw fa-user-graduate"></i>
-            <span>Mahasiswa</span></a>
+            <span>Siswa</span></a>
     </li>
 
-    <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link" href="#tabel-siswa">
-            <i class="fas fa-fw fa-user"></i>
-            <span>Profile Anda</span></a>
-    </li>
+
 
     <!-- Divider -->
-    <hr class="sidebar-divider">
+    <?php if ($this->session->userdata('level') === 'admin'): ?>
+        <hr class="sidebar-divider">
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Admin
-    </div>
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Admin
+        </div>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="admin/DaftarPetugas" aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-user-plus"></i>
-            <span>Tambah Petugas</span>
-        </a>
-    </li>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="admin/daftarPetugas" aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-user-plus"></i>
+                <span>Tambah Petugas</span>
+            </a>
+        </li>
+    <?php endif; ?>
+
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
